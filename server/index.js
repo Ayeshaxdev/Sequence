@@ -471,14 +471,36 @@ function clearTurnTimer(room) { if (room.currentTimerHandle) clearTimeout(room.c
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, '0.0.0.0', async () => {
   console.log(`\n🎯 Server running on http://localhost:${PORT}`);
-  try {
-    const authtoken = process.env.NGROK_AUTHTOKEN;
-    if (!authtoken) {
-      console.log('ℹ️ NGROK_AUTHTOKEN not set — skipping public tunnel.');
-      return;
+  
+  // Only try to start ngrok if we are NOT running in production (like on Render)
+  if (process.env.NODE_ENV !== 'production') {
+    try {
+      const options = { addr: PORT };
+      
+      // The ngrok Node API doesn't auto-read the CLI config file, so we read it manually.
+      let token = process.env.NGROK_AUTHTOKEN;
+      if (!token) {
+        const ngrokConfigPath = path.join(os.homedir(), 'AppData', 'Local', 'ngrok', 'ngrok.yml');
+        if (fs.existsSync(ngrokConfigPath)) {
+          const configContent = fs.readFileSync(ngrokConfigPath, 'utf8');
+          const match = configContent.match(/authtoken:\s*([^\s]+)/);
+          if (match && match[1]) token = match[1];
+        }
+      }
+
+      if (token) {
+        options.authtoken = token;
+      }
+      
+      const listener = await ngrok.forward(options);
+      publicUrl = listener.url();
+      console.log(`🌍 Public Backup Tunnel Live: ${publicUrl}`);
+      console.log(`Share this link to play with friends over the internet right now!\n`);
+    } catch (err) { 
+      console.log(`⚠️ Ngrok Tunnel Error: ${err.message}`); 
+      console.log(`If it asks for an authtoken, run: npx ngrok config add-authtoken <your_token>`);
     }
-    const listener = await ngrok.forward({ addr: PORT, authtoken });
-    publicUrl = listener.url();
-    console.log(`🌍 Public Tunnel: ${publicUrl}\n`);
-  } catch (err) { console.log(`⚠️ Tunnel Error: ${err.message}`); }
+  } else {
+    console.log(`🚀 Running in Production Mode. Public tunnel skipped.`);
+  }
 });
