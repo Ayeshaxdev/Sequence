@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lobby — Sequence Game</title>
+  <meta name="description" content="Game lobby — choose your team and get ready to play Sequence.">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/lobby.css">
+</head>
+<body class="felt-bg">
+
+<header class="lobby-header">
+    <a href="/" class="header-logo font-logo">SEQUENCE</a>
+    
+    <div class="header-actions">
+      <!-- Volume Icon -->
+      <button class="icon-btn" id="btn-mute" title="Toggle Sound">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        </svg>
+      </button>
+
+      <!-- Settings Icon -->
+      <button class="icon-btn" id="btn-settings" title="Settings">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+      </button>
+
+      <!-- Info Icon -->
+      <button class="icon-btn" id="btn-info" title="Information">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+      </button>
+
+      <!-- Feedback Button -->
+      <button class="btn-outline-gold" id="btn-feedback">Feedback</button>
+    </div>
+  </header>
+
+  <!-- Main Lobby Layout -->
+  <main class="lobby-master-panel panel">
+    <h1 class="master-title font-logo text-center">LOBBY</h1>
+    
+    <div class="lobby-layout-grid">
+      <!-- ── LEFT COLUMN ─────────────────────────────────────────── -->
+      <div class="lobby-left">
+        
+        <!-- Invite -->
+        <section class="section-block">
+          <h2 class="section-title font-logo text-center">INVITE</h2>
+          <p class="section-hint text-center text-white">Share this link to invite players:</p>
+          <div class="invite-box elegant-invite" id="invite-box" title="Click to copy">
+            <span class="invite-url" id="invite-url">Loading...</span>
+            <button class="btn btn-blue btn-sm copy-btn-new" id="copy-btn">Copy</button>
+          </div>
+        </section>
+
+        <!-- Players -->
+        <section class="section-block">
+          <h2 class="section-title font-logo text-center">PLAYERS <span class="icon-info">i</span></h2>
+          <div class="players-panel clean-panel">
+            <div class="all-players-list" id="all-players-list">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- Teams -->
+        <section class="section-block">
+          <h2 class="section-title font-logo text-center">TEAMS <span class="icon-info">i</span></h2>
+          <div class="pastel-teams">
+            
+            <div class="team-card team-red-pastel" id="team-card-red">
+              <h3 class="team-name text-center">RED</h3>
+              <div class="team-players" id="slots-red">
+                <div class="player-slot empty">Empty Slot</div>
+                <div class="player-slot empty">Empty Slot</div>
+              </div>
+              <button class="btn btn-red-soft btn-sm team-join-btn" id="join-red" data-team="red">Join Red</button>
+              <button class="btn-text-soft">+ Add Bot</button>
+            </div>
+
+            <div class="team-card team-blue-pastel" id="team-card-blue">
+              <h3 class="team-name text-center">BLUE</h3>
+              <div class="team-players" id="slots-blue">
+                <div class="player-slot empty">Empty Slot</div>
+                <div class="player-slot empty">Empty Slot</div>
+              </div>
+              <button class="btn btn-blue-soft btn-sm team-join-btn" id="join-blue" data-team="blue">Join Blue</button>
+              <button class="btn-text-soft">+ Add Bot</button>
+            </div>
+
+            <div class="team-card team-green-pastel" id="team-card-green">
+              <h3 class="team-name text-center">GREEN</h3>
+              <div class="team-players" id="slots-green">
+                <div class="player-slot empty">Empty Slot</div>
+                <div class="player-slot empty">Empty Slot</div>
+              </div>
+              <button class="btn btn-green-soft btn-sm team-join-btn" id="join-green" data-team="green">Join Green</button>
+              <button class="btn-text-soft">+ Add Bot</button>
+            </div>
+
+          </div>
+        </section>
+
+        <div class="leave-team-row justify-center" id="leave-team-row" style="display:none">
+          <button class="btn btn-ghost btn-sm" id="leave-team-btn">Leave Team</button>
+        </div>
+      </div>
+
+      <!-- ── RIGHT COLUMN ────────────────────────────────────────── -->
+      <div class="lobby-right">
+        
+        <!-- Settings -->
+        <section class="section-block">
+          <h2 class="section-title font-logo text-center">SETTINGS</h2>
+          <div class="settings-grid clean-settings">
+            <div class="setting-row">
+              <label class="setting-label text-gold" for="win-condition">Win Condition</label>
+              <select class="select-field elegant-select" id="win-condition">
+                <option value="play-all-cards">Play All Cards</option>
+                <option value="two-sequences">First to Two Sequences</option>
+                <option value="first-sequence">First Sequence Wins</option>
+              </select>
+            </div>
+            <div class="setting-row">
+              <label class="setting-label text-gold" for="turn-timer">Turn Timer</label>
+              <select class="select-field elegant-select" id="turn-timer">
+                <option value="0">No Limit</option>
+                <option value="15">15 seconds</option>
+                <option value="30">30 seconds</option>
+                <option value="60">1 minute</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <!-- Chat -->
+        <section class="section-block chat-section">
+          <h2 class="section-title font-logo text-center">CHAT</h2>
+          <div class="chat-panel clean-chat-panel">
+            <div class="chat-messages" id="lobby-chat">
+               <div class="chat-placeholder">No messages yet. Say hello!</div>
+            </div>
+
+            <!-- Pre-written messages ab dark box ke andar hain -->
+            <div class="quick-phrases mt-2" id="quick-phrases">
+              <button class="quick-btn-dark" data-msg="I'm ready!">I'm ready!</button>
+              <button class="quick-btn-dark" data-msg="Anyone else joining?">Anyone else joining?</button>
+              <button class="quick-btn-dark" data-msg="Let's go!">Let's go!</button>
+              <button class="quick-btn-dark" data-msg="Waiting for more players">Waiting for more players</button>
+            </div>
+
+            <div class="chat-input-row dark-input-row mt-3">
+              <input class="input-field chat-input dark-input" type="text" id="lobby-chat-input" placeholder="Type a message..." maxlength="200" />
+              <button class="btn btn-gold-solid btn-sm" id="lobby-send-btn">Send</button>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div> <!-- End Grid -->
+
+    <!-- Start Game Button ab column se bahar nikal kar poori width par hai -->
+    <div class="start-section-full mt-4">
+      <button class="btn btn-gold-solid btn-lg w-full" id="start-game-btn" disabled>Start Game</button>
+      <p class="start-hint text-center mt-2" id="host-only-hint" style="display:none">Only the host can start the game</p>
+    </div>
+  </main>
+
+<!-- ════════════ MODALS OVERLAY ════════════ -->
+  <div class="modal-overlay" id="modal-overlay" style="display: none;">
+    
+    <!-- 1. SETTINGS MODAL -->
+    <div class="elegant-modal" id="modal-settings" style="display: none;">
+      <button class="modal-close">×</button>
+      <h2 class="modal-title">Settings</h2>
+      
+      <div class="modal-row mt-3">
+        <div>
+          <div style="font-weight: bold; font-size: 1rem;">Sound</div>
+          <div class="text-muted text-sm">Toggle game sound effects</div>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="sound-toggle" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <hr class="modal-divider">
+      
+      <h3 class="modal-subtitle">GAME</h3>
+      <div class="modal-row"><span class="text-muted">Win Condition</span><span>Play All Cards</span></div>
+      <div class="modal-row"><span class="text-muted">Turn Timer</span><span>No Limit</span></div>
+      <div class="modal-row"><span class="text-muted">Role</span><span>Host (Host)</span></div>
+    </div>
+
+<!-- 2. HOW TO PLAY (INFO) MODAL -->
+    <div class="elegant-modal" id="modal-info" style="display: none;">
+      <button class="modal-close">×</button>
+      <h2 class="modal-title">How to Play</h2>
+      
+      <div class="scrollable-content">
+        <h3 class="modal-subtitle">Objective</h3>
+        <p class="text-sm" style="line-height: 1.5; margin-bottom: 15px;">Form <b>sequences</b> — 5 chips in a row (horizontal, vertical, or diagonal). Team with the most sequences when no moves remain wins.</p>
+        
+        <h3 class="modal-subtitle">Your Turn</h3>
+        <ol class="text-sm" style="line-height: 1.6; padding-left: 15px; margin-bottom: 15px;">
+          <li>Select a card from your hand.</li>
+          <li>Place your chip on a matching board slot.</li>
+          <li>A new card is drawn automatically.</li>
+        </ol>
+
+        <h3 class="modal-subtitle">Special Cards</h3>
+        <p class="text-sm" style="margin-bottom: 8px;"><b style="color: #6fa8ff;">Two-Eyed Jack</b> — wild card, place your chip on any empty slot.</p>
+        <p class="text-sm" style="margin-bottom: 15px;"><b style="color: #ff9f43;">One-Eyed Jack</b> — remove any opponent's chip from the board.</p>
+
+        <h3 class="modal-subtitle">Dead Cards & Discard</h3>
+        <p class="text-sm" style="line-height: 1.5; margin-bottom: 15px;">A card is <b>dead</b> when both matching board slots are already occupied. On your turn, you may discard <b>one dead card</b> to draw a replacement, then play your normal turn. Only 1 discard per turn.</p>
+
+        <!-- YEH WALA HISSA ADD KIYA HAI -->
+        <h3 class="modal-subtitle">Corners</h3>
+        <p class="text-sm" style="line-height: 1.5; margin-bottom: 15px;">The 4 corner slots count as occupied for <b>every team</b> and can complete any sequence.</p>
+
+        <h3 class="modal-subtitle">Intersections</h3>
+        <p class="text-sm" style="line-height: 1.5; margin-bottom: 15px;">Sequences can <b>share chips</b>, but two sequences may share <b>at most one chip</b>. A single chip can be part of multiple sequences in different directions.</p>
+
+        <h3 class="modal-subtitle">Setup</h3>
+        <ul class="text-sm" style="list-style: none; padding: 0; line-height: 1.6;">
+          <li><b>Players:</b> 2–6 (teams of 2 or 3)</li>
+          <li><b>Hand:</b> 7 cards each</li>
+          <li><b>Board:</b> 10x10 grid of playing cards</li>
+        </ul>
+      </div>
+    </div>
+
+<!-- 3. FEEDBACK MODAL -->
+    <div class="elegant-modal" id="modal-feedback" style="display: none;">
+      <button class="modal-close">×</button>
+      <h2 class="modal-title">Share Feedback</h2>
+      <p class="text-sm text-muted mb-3">Let us know what is working, what is confusing, or what you want next.</p>
+      
+      <div class="scrollable-content" style="max-height: 350px;">
+        <label class="text-sm font-bold" style="display:block; margin-bottom: 5px; color: #e8d087;">Name</label>
+        <!-- Idhar hum 'white-input' class use kar rahe hain jo CSS mein white background degi -->
+        <input type="text" class="white-input w-full mb-3" placeholder="Your name" style="background: white !important; color: black !important; border-radius: 4px; padding: 10px; border: none;">
+        
+        <label class="text-sm font-bold" style="display:block; margin-bottom: 5px; color: #e8d087;">Email</label>
+        <input type="email" class="white-input w-full mb-3" placeholder="you@example.com" style="background: white !important; color: black !important; border-radius: 4px; padding: 10px; border: none;">
+        
+        <label class="text-sm font-bold" style="display:block; margin-bottom: 5px; color: #e8d087;">Feedback</label>
+        <textarea class="white-input w-full mb-3" rows="4" placeholder="Tell us how we can improve..." style="background: white !important; color: black !important; border-radius: 4px; padding: 10px; border: none;"></textarea>
+        
+        <button class="btn-gold-solid w-full" id="submit-feedback">Send Feedback</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="toast-container"></div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/lobby.js"></script>
+</body>
+</html>

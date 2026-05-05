@@ -1,0 +1,294 @@
+/* ═══════════════════════════════════════════════════════════
+   LANDING PAGE STYLES
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─── Animated Background Cards ────────────────────────────── */
+.bg-cards {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-card-item {
+  position: absolute;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  color: rgba(255,255,255,0.07);
+  font-size: clamp(10px, 1.5vw, 18px);
+  animation: bgCardFloat linear infinite;
+  user-select: none;
+}
+
+@keyframes bgCardFloat {
+  0%   { transform: translateY(0) rotate(var(--rot)); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateY(-110vh) rotate(calc(var(--rot) + 20deg)); opacity: 0; }
+}
+
+/* ─── Main Layout ───────────────────────────────────────────── */
+.landing-main {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  gap: 24px;
+}
+
+/* ─── Landing Card ──────────────────────────────────────────── */
+.landing-card {
+  width: 100%;
+  max-width: 460px;
+  padding: 40px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+  overflow: hidden;
+  background: #0d3821; /* Target jesa dark green solid background */
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.landing-card::before {
+  display: none;
+}
+
+/* ─── Logo ──────────────────────────────────────────────────── */
+.logo-section {
+  text-align: center;
+}
+
+.logo-title {
+  font-size: clamp(2.2rem, 8vw, 3.5rem);
+  font-weight: 400; /* Bold (900) ko hata kar normal kiya taa ke elegant lagay */
+  color: #e8d087; /* Soft gold color */
+  background: none;
+  -webkit-text-fill-color: #e8d087;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+
+.logo-tagline {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  margin-bottom: 12px;
+}
+
+.logo-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  color: var(--gold);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  padding: 0;
+  transition: color 0.2s;
+}
+.link-btn:hover { color: var(--gold-light); }
+
+/* ─── Form ──────────────────────────────────────────────────── */
+.landing-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-label {
+  font-size: 0.85rem;
+  color: #ffffff; 
+  font-weight: 400;
+}
+
+.char-counter {
+  text-align: right;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: -6px;
+}
+
+/* ─── Divider ───────────────────────────────────────────────── */
+.divider {
+  position: relative;
+  text-align: center;
+}
+.divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0; right: 0;
+  height: 1px;
+  background: var(--border);
+}
+.divider span {
+  position: relative;
+  background: var(--glass-bg);
+  padding: 0 12px;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+/* ─── Join Row ──────────────────────────────────────────────── */
+.join-row {
+  display: flex;
+  gap: 8px;
+}
+.join-row .input-field { flex: 1; font-size: 0.85rem; padding: 10px 14px; }
+.join-row .btn { flex-shrink: 0; }
+
+/* ─── Feature Pills ─────────────────────────────────────────── */
+.feature-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.pill {
+  padding: 8px 16px;
+  background: #0d3821; /* Panel wala same dark green */
+  border: none; /* Border hata diya taa ke clean lagay */
+  border-radius: 999px;
+  font-size: 0.8rem;
+  color: #e8d087; /* Soft gold text */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Thora sa shadow taa ke pop out kare */
+}
+
+/* ─── Modals ────────────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.modal-box {
+  width: 100%;
+  max-width: 520px;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 32px 28px;
+  position: relative;
+  animation: slideUp 0.25s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--text-secondary);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+.modal-close:hover {
+  background: rgba(255,255,255,0.14);
+  color: var(--text-primary);
+}
+
+.rules-content h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--gold);
+  margin: 16px 0 6px;
+}
+
+.rules-content p, .rules-content li {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.rules-content ul {
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Jack badge inline (in rules text) */
+.jack-badge-inline {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+.jack-1eye-inline { background: radial-gradient(circle, #ff8888, #cc3333); }
+.jack-2eye-inline { background: radial-gradient(circle, #88ccff, #2255cc); }
+
+/* ─── Join Room Badge (shown when ?join= param present) ─────────────────── */
+.join-room-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: rgba(67,160,71,0.1);
+  border: 1px solid rgba(67,160,71,0.25);
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  color: #6fcf73;
+  font-weight: 500;
+}
+.join-room-badge code {
+  background: rgba(255,255,255,0.1);
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-family: monospace;
+  color: var(--text-primary);
+  font-size: 0.8rem;
+}
+
+/* ─── Responsive ────────────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .landing-card { padding: 28px 20px; }
+  .logo-title { letter-spacing: 4px; }
+}

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sequence — Play the Classic Card Strategy Game Online</title>
+  <meta name="description" content="Play Sequence online with friends. Create a private room, invite up to 6 players across 3 teams, and compete in this classic card strategy game.">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/landing.css">
+</head>
+<body class="felt-bg">
+
+
+
+  <!-- Main landing card -->
+  <main class="landing-main">
+    <div class="landing-card panel">
+
+      <!-- Logo -->
+      <div class="logo-section">
+        <h1 class="logo-title font-logo">SEQUENCE</h1>
+        <p class="logo-tagline">Create a room and invite your friends!</p>
+        <div class="logo-links">
+          <button class="link-btn" id="btn-rules">Rules</button>
+          <span class="text-muted">·</span>
+          <button class="link-btn" id="btn-strategy">Strategy</button>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <form class="landing-form" id="create-form" autocomplete="off">
+        <label class="form-label" for="player-name">Enter your name</label>
+        <input
+          class="input-field"
+          type="text"
+          id="player-name"
+          name="playerName"
+          placeholder="Your name here..."
+          maxlength="24"
+          autocomplete="off"
+          spellcheck="false"
+          required
+        />
+        <div class="char-counter" id="char-counter">0 / 24</div>
+        <button class="btn btn-gold btn-lg w-full" type="submit" id="create-btn">
+          Create Game
+        </button>
+      </form>
+
+      <!-- Or join section -->
+      <div class="divider"><span>or</span></div>
+      <div class="join-section">
+        <p class="text-muted" style="font-size:0.85rem; margin-bottom:10px;">Have an invite link? Paste it below</p>
+        <div class="join-row">
+          <input class="input-field" type="text" id="join-link" placeholder="Paste invite link..." />
+          <button class="btn btn-outline" id="join-btn" type="button">Join</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Feature pills -->
+    <div class="feature-pills">
+      <div class="pill">🃏 2–6 Players</div>
+      <div class="pill">👥 3 Teams</div>
+      <div class="pill">⚡ Real-time</div>
+      <div class="pill">💬 Live Chat</div>
+    </div>
+  </main>
+
+  <!-- Rules Modal -->
+  <div class="modal-overlay" id="rules-modal" role="dialog" aria-modal="true" aria-label="Game Rules" style="display:none">
+    <div class="modal-box panel">
+      <button class="modal-close" id="close-rules" aria-label="Close">✕</button>
+      <h2 class="font-logo" style="color:var(--gold); margin-bottom:16px;">How to Play</h2>
+      <div class="rules-content">
+        <p><strong>Objective:</strong> Be the first team to complete the required number of <em>Sequences</em> — 5 chips in a row.</p>
+        <h3>On Your Turn</h3>
+        <ul>
+          <li>Play a card from your hand to claim the matching space on the board.</li>
+          <li>Place one of your team's chips on that space.</li>
+          <li>Draw a replacement card from the deck.</li>
+        </ul>
+        <h3>Jack Special Rules</h3>
+        <ul>
+          <li><span class="jack-badge-inline jack-1eye-inline"></span> <strong>One-eyed Jacks (J♠, J♥)</strong> — Remove any opponent chip from the board (not from a completed sequence).</li>
+          <li><span class="jack-badge-inline jack-2eye-inline"></span> <strong>Two-eyed Jacks (J♦, J♣)</strong> — Wild! Place your chip on any empty space.</li>
+        </ul>
+        <h3>Sequences</h3>
+        <p>5 chips in a row (horizontal, vertical, or diagonal). Corner spaces are free for all teams. Chips in a completed sequence cannot be removed.</p>
+        <h3>Win Conditions</h3>
+        <ul>
+          <li><strong>First Sequence:</strong> First team to complete 1 sequence wins.</li>
+          <li><strong>Two Sequences:</strong> First team to complete 2 sequences wins.</li>
+          <li><strong>Play All Cards:</strong> First player to empty their hand wins.</li>
+        </ul>
+        <h3>Teams</h3>
+        <p>Max 2 players per team. You need at least 2 players (1 per team) to start. Players without a team are not dealt cards.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Strategy Modal -->
+  <div class="modal-overlay" id="strategy-modal" role="dialog" aria-modal="true" aria-label="Strategy Tips" style="display:none">
+    <div class="modal-box panel">
+      <button class="modal-close" id="close-strategy" aria-label="Close">✕</button>
+      <h2 class="font-logo" style="color:var(--gold); margin-bottom:16px;">Strategy Tips</h2>
+      <div class="rules-content">
+        <ul>
+          <li>🎯 Focus on building your sequence while blocking opponents.</li>
+          <li>🃏 Save Two-eyed Jacks for critical spots — they're powerful wildcards.</li>
+          <li>🚫 Use One-eyed Jacks to disrupt opponent sequences before they complete.</li>
+          <li>⭐ Corner spaces are free — route your sequences through them.</li>
+          <li>🤝 In team mode, coordinate with your teammate to build sequences together.</li>
+          <li>🔄 Cards that have all board positions occupied are "dead cards" — the host can declare a dead hand to allow a discard.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <script src="/js/utils.js"></script>
+  <script src="/js/landing.js"></script>
+</body>
+</html>

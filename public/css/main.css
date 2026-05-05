@@ -1,0 +1,691 @@
+/* ═══════════════════════════════════════════════════════════════════
+   SEQUENCE GAME — Global CSS Design System
+   Google Fonts: Cinzel (logo), Inter (UI)
+   ═══════════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ─── Design Tokens ─────────────────────────────────────────────── */
+:root {
+  /* Colors */
+  --bg-felt: #166033;
+  /* solid lush green from board */
+  --bg-dark: #121526;
+  /* dark navy for top bar */
+  --bg-surface: #1b4c2b;
+  /* dark panel backgrounds */
+  --bg-card: #f4f5f0;
+  /* slightly off white for board cells */
+  --bg-card-back: #d8303f;
+
+  --gold: #e0b953;
+  /* sequnence logo gold */
+  --gold-light: #f4d97e;
+  --gold-dark: #b39032;
+
+  --red-team: #e8384a;
+  /* vibrant red chips */
+  --red-team-light: #fc5c6c;
+  --blue-team: #4285f4;
+  --blue-team-light: #70a5ff;
+  --green-team: #45b550;
+  /* vibrant green chips */
+  --green-team-light: #69d473;
+
+  --text-primary: #f4f5f0;
+  --text-secondary: #c2c0af;
+  --text-muted: #8a8e80;
+
+  --border: rgba(224, 185, 83, 0.3);
+  --border-strong: rgba(224, 185, 83, 0.6);
+
+  --glass-bg: rgba(22, 96, 51, 0.95);
+  --glass-border: rgba(224, 185, 83, 0.2);
+
+  /* Shadows */
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --shadow-chip: 0 2px 8px rgba(0, 0, 0, 0.5);
+  --shadow-panel: 0 8px 32px rgba(0, 0, 0, 0.5);
+
+  /* Spacing */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  /* Card dims (board cells) */
+  --cell-w: clamp(34px, 3.8vw, 52px);
+  --cell-h: clamp(46px, 5.2vw, 70px);
+  /* legacy aliases kept for any remaining references */
+  --cell-width: var(--cell-w);
+  --cell-height: var(--cell-h);
+
+}
+
+/* ─── Reset & Base ──────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Game felt background ───────────────────────────────── */
+.felt-bg {
+  background-color: #1a4a2e; /* Fallback color */
+  /* Ensure karein ke asset ka naam aur extension (.png ya .jpg) exactly match kare */
+  background-image: url('../assets/background\ image.png'); 
+  background-size: cover; /* Agar pattern chota hai toh isay 'auto' kar lein */
+  background-position: center;
+}
+
+/* ─── Typography ────────────────────────────────────────────────── */
+.font-logo {
+  font-family: 'Cinzel', serif;
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+}
+
+/* ─── Buttons ───────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  white-space: nowrap;
+  letter-spacing: 0.3px;
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.btn-gold {
+  background: linear-gradient(180deg, #a8ab5e 0%, #767b3d 100%);
+  color: #1a2a1a;
+  box-shadow: none;
+  border: none;
+}
+
+.btn-gold:hover:not(:disabled) {
+  background: linear-gradient(180deg, #b8bb6e 0%, #868b4d 100%);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-strong);
+}
+
+.btn-outline:hover:not(:disabled) {
+  background: rgba(201, 162, 39, 0.1);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.btn-ghost {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.btn-red {
+  background: var(--red-team);
+  color: #fff;
+}
+
+.btn-blue {
+  background: var(--blue-team);
+  color: #fff;
+}
+
+.btn-green {
+  background: var(--green-team);
+  color: #fff;
+}
+
+.btn-red:hover:not(:disabled) {
+  background: var(--red-team-light);
+  transform: translateY(-1px);
+}
+
+.btn-blue:hover:not(:disabled) {
+  background: var(--blue-team-light);
+  transform: translateY(-1px);
+}
+
+.btn-green:hover:not(:disabled) {
+  background: var(--green-team-light);
+  transform: translateY(-1px);
+}
+
+.btn-sm {
+  padding: 8px 16px;
+  font-size: 0.82rem;
+}
+
+.btn-lg {
+  padding: 16px 40px;
+  font-size: 1.05rem;
+}
+
+/* ─── Card CSS Renderer ─────────────────────────────────────────── */
+/*
+ * CARD SWAP POINT: To use external card images instead of CSS cards,
+ * replace the .playing-card styles and the JS renderCard() function
+ * in public/js/cardRenderer.js. Just set background-image on .playing-card
+ * based on card code, and the rest of the game stays the same.
+ */
+
+.playing-card {
+  background: var(--bg-card);
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  overflow: hidden;
+}
+
+.playing-card:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.playing-card .card-rank {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.playing-card .card-suit {
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+.playing-card .card-rank-top {
+  position: absolute;
+  top: 2px;
+  left: 4px;
+  font-size: 0.7em;
+  font-weight: 700;
+  line-height: 1.1;
+  text-align: left;
+}
+
+.playing-card .card-rank-bot {
+  position: absolute;
+  bottom: 2px;
+  right: 4px;
+  font-size: 0.7em;
+  font-weight: 700;
+  line-height: 1.1;
+  text-align: right;
+  transform: rotate(180deg);
+}
+
+.playing-card.card-red {
+  color: #cc2222;
+}
+
+.playing-card.card-black {
+  color: #111;
+}
+
+/* Wild / Free corner card */
+.playing-card.card-wild {
+  background: linear-gradient(135deg, #1a4a2e, #0f2a1a);
+  border: 2px solid var(--gold);
+  cursor: default;
+}
+
+.playing-card.card-wild:hover {
+  transform: none;
+}
+
+/* Card back (deck) */
+.card-back {
+  background-image: url('../assets/svg%20cards/back.svg');
+  background-size: cover;
+  background-position: center;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: transparent;
+}
+
+/* ─── Chips ─────────────────────────────────────────────────────── */
+.chip {
+  border-radius: 50%;
+  pointer-events: none;
+  border: none;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+/* Base chip style with dashed inner ring (removed for SVG) */
+.chip::before,
+.chip::after {
+  display: none;
+}
+
+.chip-red {
+  background-image: url('../assets/svg%20cards/red-chip.svg');
+  background-size: cover;
+}
+
+.chip-blue {
+  background-image: url('../assets/svg%20cards/blue-chip.svg');
+  background-size: cover;
+}
+
+.chip-green {
+  background-image: url('../assets/svg%20cards/green-chip.svg');
+  background-size: cover;
+}
+
+/* Chip pop-in animation */
+@keyframes chipPlace {
+  0% {
+    transform: scale(0) rotate(-90deg);
+    opacity: 0;
+  }
+
+  60% {
+    transform: scale(1.2) rotate(5deg);
+    opacity: 1;
+  }
+
+  80% {
+    transform: scale(0.9);
+  }
+
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.chip-new {
+  animation: chipPlace 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Chip sequence glow */
+.chip-sequence {
+  border-color: #fff !important;
+  box-shadow: 0 0 12px 6px rgba(255, 255, 255, 0.6);
+  z-index: 5;
+}
+
+/* ─── Panel / Glass ─────────────────────────────────────────────── */
+.panel {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(10px);
+}
+
+/* ─── Input / Form ──────────────────────────────────────────────── */
+.input-field {
+  width: 100%;
+  padding: 12px 16px;
+  background-color: #ffffff !important; /* Isko strictly white karega */
+  border: none !important;
+  border-radius: 6px;
+  color: #1a2a1a !important; /* Text ko clearly dark dikhayega */
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  outline: none;
+}
+
+.input-field:focus {
+  box-shadow: 0 0 0 2px rgba(201, 162, 39, 0.5); /* Focus karne pe thora sa gold glow dega */
+}
+
+.input-field::placeholder {
+  color: #888888 !important; /* Placeholder text ko soft grey karega */
+}
+
+.select-field {
+  width: 100%;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23c9a227' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+}
+
+.select-field:focus {
+  border-color: var(--gold);
+}
+
+.select-field option {
+  background: #1a4a2e;
+}
+
+/* ─── Chat ──────────────────────────────────────────────────────── */
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow-y: auto;
+  padding: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(201, 162, 39, 0.3) transparent;
+}
+
+.chat-messages::-webkit-scrollbar {
+  width: 4px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background: rgba(201, 162, 39, 0.3);
+  border-radius: 2px;
+}
+
+.chat-msg {
+  font-size: 0.82rem;
+  line-height: 1.4;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.chat-msg .chat-name {
+  font-weight: 600;
+  margin-right: 4px;
+}
+
+.chat-msg.team-red .chat-name {
+  color: var(--red-team-light);
+}
+
+.chat-msg.team-blue .chat-name {
+  color: var(--blue-team-light);
+}
+
+.chat-msg.team-green .chat-name {
+  color: var(--green-team-light);
+}
+
+.chat-msg.team-null .chat-name {
+  color: var(--text-secondary);
+}
+
+.chat-msg.system {
+  color: var(--gold);
+  font-style: italic;
+  background: rgba(201, 162, 39, 0.06);
+}
+
+/* ─── Toast Notifications ───────────────────────────────────────── */
+#toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.toast {
+  padding: 12px 20px;
+  border-radius: var(--radius-md);
+  background: var(--glass-bg);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-size: 0.88rem;
+  font-weight: 500;
+  box-shadow: var(--shadow-panel);
+  animation: toastIn 0.3s ease;
+  max-width: 280px;
+}
+
+.toast-success {
+  border-color: var(--green-team);
+}
+
+.toast-error {
+  border-color: var(--red-team);
+}
+
+.toast-info {
+  border-color: var(--gold);
+}
+
+@keyframes toastIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes toastOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateX(110%);
+    opacity: 0;
+  }
+}
+
+.toast-out {
+  animation: toastOut 0.3s ease forwards;
+}
+
+/* ─── Emoji Reactions ───────────────────────────────────────────── */
+.reaction-float {
+  position: fixed;
+  font-size: 2rem;
+  pointer-events: none;
+  animation: floatUp 2s ease-out forwards;
+  z-index: 9998;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(0.5);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-120px) scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* ─── Scrollbar Global ──────────────────────────────────────────── */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(201, 162, 39, 0.25) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(201, 162, 39, 0.3);
+  border-radius: 4px;
+}
+
+/* ─── Utility ───────────────────────────────────────────────────── */
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.gap-4 {
+  gap: 4px;
+}
+
+.gap-8 {
+  gap: 8px;
+}
+
+.gap-12 {
+  gap: 12px;
+}
+
+.gap-16 {
+  gap: 16px;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-gold {
+  color: var(--gold);
+}
+
+.text-muted {
+  color: var(--text-secondary);
+}
+
+/* ─── Pulse animation ───────────────────────────────────────────── */
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 10px rgba(201, 162, 39, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 24px rgba(201, 162, 39, 0.7);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s infinite;
+}
+
+.animate-glow {
+  animation: glow 2s infinite;
+}
+
+/* ─── Loading Spinner ───────────────────────────────────────────── */
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(201, 162, 39, 0.2);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+/* ─── Responsive helpers ────────────────────────────────────────── */
+@media (max-width: 768px) {
+  :root {
+    --cell-width: clamp(28px, 7vw, 40px);
+    --cell-height: clamp(36px, 9vw, 52px);
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --cell-width: clamp(24px, 6.5vw, 34px);
+    --cell-height: clamp(31px, 8vw, 45px);
+  }
+}
