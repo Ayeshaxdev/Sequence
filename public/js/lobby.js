@@ -122,10 +122,13 @@ document.addEventListener('DOMContentLoaded', () => {
     async function initInviteLink() {
         try {
             const res = await fetch('/api/server-info');
-            const { localIP, port, publicUrl } = await res.json();
+            const { localIP, port, publicUrl, isProd } = await res.json();
             if (publicUrl) {
                 // ngrok is running — use universal public URL
                 inviteUrl = `${publicUrl}/lobby/${roomId}`;
+            } else if (isProd) {
+                // Cloud provider (e.g. Back4App) - just use the current browser URL!
+                inviteUrl = window.location.href;
             } else if (localIP && localIP !== 'localhost') {
                 // Same WiFi fallback
                 inviteUrl = `http://${localIP}:${port}/lobby/${roomId}`;

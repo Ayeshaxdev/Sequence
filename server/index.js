@@ -87,7 +87,12 @@ app.get('/api/room/:id', (req, res) => {
 });
 
 app.get('/api/server-info', (req, res) => {
-  res.json({ localIP: getLocalIP(), port: PORT, publicUrl });
+  res.json({ 
+    localIP: getLocalIP(), 
+    port: PORT, 
+    publicUrl,
+    isProd: process.env.NODE_ENV === 'production'
+  });
 });
 
 app.get('/lobby/:id', (req, res) => { res.sendFile(path.join(__dirname, '../public/lobby.html')); });
