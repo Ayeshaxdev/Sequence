@@ -122,19 +122,23 @@ document.addEventListener('DOMContentLoaded', () => {
     async function initInviteLink() {
         try {
             const res = await fetch('/api/server-info');
-            const { localIP, port, publicUrl, isProd } = await res.json();
-            if (publicUrl) {
-                // ngrok is running — use universal public URL
-                inviteUrl = `${publicUrl}/lobby/${roomId}`;
-            } else if (isProd) {
-                // Cloud provider (e.g. Back4App) - just use the current browser URL!
+            const { localIP, port, publicUrl } = await res.json();
+            
+            // BULLETPROOF LOGIC:
+            // If the browser is ALREADY accessing the site via a real domain (like Back4App)
+            // or a real network IP, then the URL in the address bar is the perfect invite link.
+            if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
                 inviteUrl = window.location.href;
+            } else if (publicUrl) {
+                // Host is on localhost, but ngrok is running — use ngrok URL
+                inviteUrl = `${publicUrl}/lobby/${roomId}`;
             } else if (localIP && localIP !== 'localhost') {
-                // Same WiFi fallback
+                // Host is on localhost, no ngrok — use the machine's WiFi IP
                 inviteUrl = `http://${localIP}:${port}/lobby/${roomId}`;
             }
         } catch (e) {
             console.warn('[InviteLink] Could not fetch server-info, falling back to window.location.href');
+            inviteUrl = window.location.href;
         }
         if (inviteUrlSpan) inviteUrlSpan.innerText = inviteUrl;
     }
