@@ -89,7 +89,7 @@ body {
 .felt-bg {
   background-color: #1a4a2e; /* Fallback color */
   /* Ensure karein ke asset ka naam aur extension (.png ya .jpg) exactly match kare */
-  background-image: url('../assets/background\ image.png'); 
+  background-image: url('../assets/background\ image.jpg');
   background-size: cover; /* Agar pattern chota hai toh isay 'auto' kar lein */
   background-position: center;
 }
